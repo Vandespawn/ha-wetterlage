@@ -1,12 +1,12 @@
 # Wetterlage für Home Assistant
 
-<img src="docs/images/logo.png" alt="Wetterlage-Logo" width="160" align="right">
+<img src="https://raw.githubusercontent.com/Vandespawn/ha-wetterlage/main/docs/images/logo.png" alt="Wetterlage-Logo" width="160" align="right">
 
 [![HACS](https://img.shields.io/badge/HACS-Custom-orange)](https://hacs.xyz)
-[![Lizenz: MIT](https://img.shields.io/badge/Lizenz-MIT-blue)](LICENSE)
+[![Lizenz: MIT](https://img.shields.io/badge/Lizenz-MIT-blue)](https://github.com/Vandespawn/ha-wetterlage/blob/main/LICENSE)
 
-> **Status: frühe Testversion (0.1.0).** Vorhersage, Warnungen, Pollenflug, Radar, Sensoren und Wetter-Entität
-> sind da. Das Einstellungsfeld in der Seitenleiste und die Dashboard-Karte folgen. Bis dahin lassen sich alle
+> **Status: Testversion (0.2.3).** Vorhersage, amtliche Warnungen, Pollenflug, Radar, Sensoren, Wetter-Entität
+> und Dashboard-Karte sind da. Ein eigenes Einstellungsfeld in der Seitenleiste folgt; bis dahin lassen sich alle
 > Einstellungen unter **Konfigurieren → Alle Einstellungen** als YAML ändern.
 
 Wetterlage holt Vorhersage, amtliche Warnungen, Pollenflug und Regenradar vom Deutschen Wetterdienst,
@@ -16,7 +16,7 @@ Das Ergebnis steht als Entitäten für Automationen bereit und auf einer mitgeli
 
 **Alles ist einstellbar:** Quellen, Sensoren, Rechenmodelle, Schwellenwerte, Texte und jeder Teil der Karte.
 
-## Geplanter Umfang
+## Umfang
 
 | Bereich | Inhalt |
 |---|---|
@@ -29,11 +29,11 @@ Das Ergebnis steht als Entitäten für Automationen bereit und auf einer mitgeli
 | Tagesbericht | Fließtext auf Deutsch, Bausteine und Reihenfolge wählbar |
 | Wetterstation | optional, z. B. Ecowitt; jeder Messwert frei zuordenbar |
 | Dashboard-Karte | wird mit der Integration ausgeliefert, kein zweites HACS-Paket |
-| Automationen | Ereignisse bei Warnungen und Hinweisen, Blueprints |
+| Automationen | Ereignisse `wetterlage_warnung` und `wetterlage_hinweis` |
 
 Jede Entität nennt im Attribut `grund`, warum sie diesen Wert hat, und im Attribut `quelle`, woher er stammt.
 
-Alle Einstellungen: [docs/einstellungen.md](docs/einstellungen.md)
+Alle Einstellungen: [docs/einstellungen.md](https://github.com/Vandespawn/ha-wetterlage/blob/main/docs/einstellungen.md)
 
 ## Installation
 
@@ -43,17 +43,32 @@ Alle Einstellungen: [docs/einstellungen.md](docs/einstellungen.md)
 
 Voraussetzung: Home Assistant 2026.7 oder neuer.
 
+## Dashboard-Karte
+
+Die Karte kommt mit der Integration, eine Ressource muss nicht angelegt werden.
+Im Dashboard: **Karte hinzufügen → Wetterlage**. Im Karten-Editor lässt sich jeder Abschnitt und jedes Element
+ein- und ausschalten; die Einstellungen gelten nur für diese eine Karte.
+
+```yaml
+type: custom:wetterlage-card
+abschnitte: [kopf, warnungen, hinweise, regen, bericht, tage, pollen]  # Auswahl und Reihenfolge
+pollen_ausblenden_wenn_keine: true
+tage: 5
+```
+
+Nach einem Update der Integration die Seite einmal mit **Strg + F5** neu laden.
+
 ## Datenquellen und Lizenz
 
 **Datenbasis: Deutscher Wetterdienst**, lizenziert unter [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.de).
 Einzelne Werte werden von der Integration aus diesen Daten berechnet.
 
 Die Integration lädt die Daten erst zur Laufzeit direkt vom DWD. Dieses Repo enthält keine DWD-Daten.
-Der Code steht unter der [MIT-Lizenz](LICENSE).
+Der Code steht unter der [MIT-Lizenz](https://github.com/Vandespawn/ha-wetterlage/blob/main/LICENSE).
 
 Dieses Projekt ist **kein Angebot des Deutschen Wetterdienstes** und wird von ihm weder betrieben noch unterstützt.
 
-Details: [docs/rechtliches.md](docs/rechtliches.md)
+Details: [docs/rechtliches.md](https://github.com/Vandespawn/ha-wetterlage/blob/main/docs/rechtliches.md)
 
 ## Wichtiger Hinweis
 

@@ -1,14 +1,15 @@
 {
   "domain": "wetterlage",
   "name": "Wetterlage",
+  "after_dependencies": ["frontend", "http"],
   "categories": ["weather_alerts.forecasts", "weather_alerts.public_warnings", "weather_alerts.air_quality_pollen"],
   "codeowners": ["@Vandespawn"],
   "config_flow": true,
-  "dependencies": [],
+  "dependencies": ["websocket_api"],
   "documentation": "https://github.com/Vandespawn/ha-wetterlage",
   "integration_type": "service",
   "iot_class": "cloud_polling",
   "issue_tracker": "https://github.com/Vandespawn/ha-wetterlage/issues",
   "requirements": [],
-  "version": "0.1.0"
+  "version": "0.2.3"
 }
