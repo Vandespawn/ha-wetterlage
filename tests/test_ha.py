@@ -148,9 +148,10 @@ async def test_warnungs_ereignis(hass: HomeAssistant, dwd, freezer) -> None:
 
 
 async def test_karte_websocket(hass: HomeAssistant, dwd, freezer, hass_ws_client) -> None:
+    # Erst anmelden, dann die Uhr stellen: sonst gilt der Zugang als „aus der Zukunft“.
+    client = await hass_ws_client(hass)
     freezer.move_to(NOW)
     await _setup(hass, _entry({"karte": {"tage": 4}}))
-    client = await hass_ws_client(hass)
     await client.send_json({"id": 1, "type": "wetterlage/eintraege"})
     msg = await client.receive_json()
     assert msg["success"] and msg["result"][0]["title"] == "Zuhause"
