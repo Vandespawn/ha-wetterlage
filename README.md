@@ -16,6 +16,10 @@ Das Ergebnis steht als Entitäten für Automationen bereit und auf einer mitgeli
 
 **Alles ist einstellbar:** Quellen, Sensoren, Rechenmodelle, Schwellenwerte, Texte und jeder Teil der Karte.
 
+[![In HACS öffnen](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=Vandespawn&repository=ha-wetterlage&category=integration)
+
+<img src="https://raw.githubusercontent.com/Vandespawn/ha-wetterlage/main/docs/images/karte.png" alt="Wetterlage-Karte mit amtlicher Frostwarnung, Hinweisen, Regen der nächsten Stunde, Tagesbericht, 7-Tage-Vorhersage und Pollenflug" width="380">
+
 ## Umfang
 
 | Bereich | Inhalt |
@@ -37,7 +41,8 @@ Alle Einstellungen: [docs/einstellungen.md](https://github.com/Vandespawn/ha-wet
 
 ## Installation
 
-1. HACS → ⋮ → **Benutzerdefinierte Repositories** → `https://github.com/Vandespawn/ha-wetterlage`, Kategorie **Integration**.
+1. Auf den Knopf **In HACS öffnen** oben klicken – oder in HACS → ⋮ → **Benutzerdefinierte Repositories** →
+   `https://github.com/Vandespawn/ha-wetterlage`, Kategorie **Integration**.
 2. **Wetterlage** installieren und Home Assistant neu starten.
 3. **Einstellungen → Geräte & Dienste → Integration hinzufügen → Wetterlage.**
 
