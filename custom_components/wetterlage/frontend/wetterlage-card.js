@@ -271,7 +271,7 @@ ha-card.design-dunkel{--c-bg:#1c1f24;--c-fg:#e8eaed;--c-muted:#9aa1a9;--c-line:#
 
 // ---------- Editor ----------
 const WL_LABELS = {
-  eintrag: "Ort", titel: "Titel (leer = Name des Ortes)", abschnitte: "Abschnitte (leer = wie in der Integration)",
+  eintrag: "Ort", titel: "Titel (leer = Name des Ortes)", abschnitte: "Abschnitte (Haken entfernen = ausblenden, ziehen = Reihenfolge)",
   tage: "Anzahl Tage", design: "Design", symbole: "Wettersymbole", dezimalstellen: "Nachkommastellen",
   hinweise_alle: "Ruhige Hinweise einzeln zeigen",
 };
@@ -325,7 +325,8 @@ class WetterlageCardEditor extends HTMLElement {
       this.appendChild(note);
     }
     this._form.hass = this._hass;
-    this._form.data = this._config;
+    // Ohne eigene Auswahl alle Abschnitte angehakt zeigen, damit man einzelne abwählen kann.
+    this._form.data = { abschnitte: Object.keys(WL_SECTIONS), ...this._config };
     this._form.schema = this._schema();
   }
 }
