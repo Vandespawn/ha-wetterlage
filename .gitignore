@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Editor und System
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Lokale Demos und Momentaufnahmen enthalten persönliche Standortdaten
+demo/
+station.json
+*.local.json
