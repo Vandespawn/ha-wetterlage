@@ -180,3 +180,16 @@ async def test_karte_ohne_eintrag(hass: HomeAssistant, hass_ws_client) -> None:
     await client.send_json({"id": 1, "type": "wetterlage/karte/abonnieren"})
     msg = await client.receive_json()
     assert not msg["success"] and msg["error"]["code"] == "not_found"
+
+
+async def test_karte_neu_verbinden_nach_neuladen(hass: HomeAssistant, dwd, freezer, hass_ws_client) -> None:
+    client = await hass_ws_client(hass)
+    freezer.move_to(NOW)
+    entry = _entry()
+    await _setup(hass, entry)
+    await client.send_json({"id": 1, "type": "wetterlage/karte/abonnieren"})
+    assert (await client.receive_json())["success"]
+    assert (await client.receive_json())["event"]["bereit"] is True
+    assert await hass.config_entries.async_reload(entry.entry_id)
+    await hass.async_block_till_done()
+    assert (await client.receive_json())["event"] == {"neu_verbinden": True}

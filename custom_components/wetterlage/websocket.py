@@ -43,11 +43,30 @@ def ws_karte_abonnieren(hass: HomeAssistant, connection: websocket_api.ActiveCon
         connection.send_error(msg["id"], "not_found", "Kein eingerichteter Wetterlage-Ort gefunden")
         return
     coordinator = entry.runtime_data
+    active = True
 
     @callback
     def _push() -> None:
-        connection.send_message(websocket_api.event_message(msg["id"], karte_payload(coordinator)))
+        if active:
+            connection.send_message(websocket_api.event_message(msg["id"], karte_payload(coordinator)))
 
-    connection.subscriptions[msg["id"]] = coordinator.async_add_listener(_push)
+    remove_listener = coordinator.async_add_listener(_push)
+
+    @callback
+    def _unsubscribe() -> None:
+        nonlocal active
+        active = False
+        remove_listener()
+
+    @callback
+    def _on_unload() -> None:
+        # Der Ort lädt neu (z. B. nach geänderten Einstellungen): Die Karte soll sich neu verbinden,
+        # sonst hängt sie am alten Koordinator und bekommt keine Daten mehr.
+        if active:
+            connection.send_message(websocket_api.event_message(msg["id"], {"neu_verbinden": True}))
+        _unsubscribe()
+
+    entry.async_on_unload(_on_unload)
+    connection.subscriptions[msg["id"]] = _unsubscribe
     connection.send_result(msg["id"])
     _push()

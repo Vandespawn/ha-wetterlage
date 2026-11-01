@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 DOMAIN = "wetterlage"
-VERSION = "0.2.2"  # gleich halten mit manifest.json
+VERSION = "0.2.3"  # gleich halten mit manifest.json
 CARD_URL = "/wetterlage/wetterlage-card.js"
 ATTRIBUTION = "Datenbasis: Deutscher Wetterdienst (CC BY 4.0), Werte teils von der Integration berechnet"
 

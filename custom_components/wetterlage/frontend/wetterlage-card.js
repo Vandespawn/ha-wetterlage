@@ -4,7 +4,7 @@
  * Jede Kartenoption überschreibt die Einstellung der Integration (Bereich „karte“) nur für diese Karte.
  * Im Kartenkonfig steht nur, was vom Standard abweicht.
  */
-const WL_VERSION = "0.2.2";
+const WL_VERSION = "0.2.3";
 
 const WL_SECTIONS = {
   kopf: "Kopf mit gefühlter Temperatur",
@@ -85,6 +85,9 @@ class WetterlageCard extends HTMLElement {
 
   disconnectedCallback() {
     this._unsubscribe();
+    clearTimeout(this._retry);
+    clearInterval(this._watchdog);
+    this._watchdog = null;
   }
 
   getCardSize() {
@@ -102,16 +105,53 @@ class WetterlageCard extends HTMLElement {
       const msg = { type: "wetterlage/karte/abonnieren" };
       if (this._config && this._config.eintrag) msg.eintrag = this._config.eintrag;
       this._unsub = await this._hass.connection.subscribeMessage((data) => {
+        if (data && data.neu_verbinden) {
+          // Die Integration lädt neu (z. B. nach geänderten Einstellungen): neu verbinden.
+          this._resubscribe(3000);
+          return;
+        }
         this._data = data;
+        this._lastData = Date.now();
         this._error = null;
+        this._starting = false;
         this._render();
       }, msg);
+      this._startWatchdog();
     } catch (err) {
-      this._error = (err && (err.message || err.code)) || String(err);
+      const code = err && err.code;
+      if (code === "not_found") {
+        // Home Assistant startet noch oder die Integration lädt gerade.
+        this._starting = true;
+        this._error = null;
+      } else {
+        this._error = (err && (err.message || err.code)) || String(err);
+      }
       this._render();
+      this._resubscribe(10000);
     } finally {
       this._subscribing = false;
     }
+  }
+
+  _resubscribe(delay) {
+    this._unsubscribe();
+    clearTimeout(this._retry);
+    this._retry = setTimeout(() => {
+      this._retry = null;
+      if (this.isConnected) this._subscribe();
+    }, delay);
+  }
+
+  // Kommen 12 Minuten lang keine Daten, neu verbinden (z. B. nach einem Neustart von Home Assistant).
+  _startWatchdog() {
+    if (this._watchdog) return;
+    this._lastData = this._lastData || Date.now();
+    this._watchdog = setInterval(() => {
+      if (this._unsub && Date.now() - this._lastData > 12 * 60 * 1000) {
+        this._lastData = Date.now();
+        this._resubscribe(0);
+      }
+    }, 60 * 1000);
   }
 
   _unsubscribe() {
@@ -266,6 +306,7 @@ class WetterlageCard extends HTMLElement {
     const s = this._settings();
     let body;
     if (this._error) body = `<div class="msg">Wetterlage: ${wlEsc(this._error)}</div>`;
+    else if (!this._data && this._starting) body = `<div class="msg muted">Wetterlage startet … (die Integration holt gerade die DWD-Daten)</div>`;
     else if (!this._data) body = `<div class="msg muted">Wetterlage lädt …</div>`;
     else if (!this._data.bereit) body = `<div class="msg muted">Noch keine Daten vom DWD.</div>`;
     else body = s.sections.map((id) => this._section(id, this._data, s)).join("");
