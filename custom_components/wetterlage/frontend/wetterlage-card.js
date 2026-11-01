@@ -4,7 +4,7 @@
  * Jede Kartenoption überschreibt die Einstellung der Integration (Bereich „karte“) nur für diese Karte.
  * Im Kartenkonfig steht nur, was vom Standard abweicht.
  */
-const WL_VERSION = "0.2.1";
+const WL_VERSION = "0.2.2";
 
 const WL_SECTIONS = {
   kopf: "Kopf mit gefühlter Temperatur",
@@ -414,8 +414,23 @@ class WetterlageCardEditor extends HTMLElement {
   }
 }
 
-if (!customElements.get("wetterlage-card")) customElements.define("wetterlage-card", WetterlageCard);
-if (!customElements.get("wetterlage-card-editor")) customElements.define("wetterlage-card-editor", WetterlageCardEditor);
+// Anmelden. Manche andere Karten ersetzen nach dem Laden window.customElements durch eine eigene
+// Registry (Polyfill); eine vorher angemeldete Karte ist darin unbekannt und Home Assistant zeigt
+// „Konfigurationsfehler“. Darum eine Minute lang prüfen und bei Bedarf neu anmelden.
+function wlRegister() {
+  try {
+    if (!customElements.get("wetterlage-card")) customElements.define("wetterlage-card", WetterlageCard);
+    if (!customElements.get("wetterlage-card-editor")) customElements.define("wetterlage-card-editor", WetterlageCardEditor);
+  } catch (err) {
+    console.warn("Wetterlage-Karte: Anmeldung fehlgeschlagen", err);
+  }
+}
+wlRegister();
+let wlChecks = 0;
+const wlTimer = setInterval(() => {
+  wlRegister();
+  if (++wlChecks >= 60) clearInterval(wlTimer);
+}, 1000);
 
 window.customCards = window.customCards || [];
 if (!window.customCards.some((c) => c.type === "wetterlage-card")) {

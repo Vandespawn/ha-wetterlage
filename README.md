@@ -5,7 +5,7 @@
 [![HACS](https://img.shields.io/badge/HACS-Custom-orange)](https://hacs.xyz)
 [![Lizenz: MIT](https://img.shields.io/badge/Lizenz-MIT-blue)](https://github.com/Vandespawn/ha-wetterlage/blob/main/LICENSE)
 
-> **Status: Testversion (0.2.1).** Vorhersage, amtliche Warnungen, Pollenflug, Radar, Sensoren, Wetter-Entität
+> **Status: Testversion (0.2.2).** Vorhersage, amtliche Warnungen, Pollenflug, Radar, Sensoren, Wetter-Entität
 > und Dashboard-Karte sind da. Ein eigenes Einstellungsfeld in der Seitenleiste folgt; bis dahin lassen sich alle
 > Einstellungen unter **Konfigurieren → Alle Einstellungen** als YAML ändern.
 
