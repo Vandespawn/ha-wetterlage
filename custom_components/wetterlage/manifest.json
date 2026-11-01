@@ -1,6 +1,7 @@
 {
   "domain": "wetterlage",
   "name": "Wetterlage",
+  "categories": ["weather_alerts.forecasts", "weather_alerts.public_warnings", "weather_alerts.air_quality_pollen"],
   "codeowners": ["@Vandespawn"],
   "config_flow": true,
   "dependencies": [],

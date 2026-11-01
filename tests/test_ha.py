@@ -1,15 +1,19 @@
 """Tests gegen ein echtes Home Assistant (laufen in GitHub Actions unter Linux).
 
 Lokal ohne pytest-homeassistant-custom-component werden sie übersprungen.
+In GitHub Actions ist WETTERLAGE_HA_TESTS gesetzt: Dort schlägt ein fehlendes Paket fehl,
+statt die Tests still zu überspringen.
 """
 
 from __future__ import annotations
 
+import os
 from unittest.mock import AsyncMock, patch
 
 import pytest
 
-pytest.importorskip("pytest_homeassistant_custom_component")
+if not os.environ.get("WETTERLAGE_HA_TESTS"):
+    pytest.importorskip("pytest_homeassistant_custom_component")
 
 from conftest import NOW, make_hours  # noqa: E402
 from homeassistant import config_entries  # noqa: E402
