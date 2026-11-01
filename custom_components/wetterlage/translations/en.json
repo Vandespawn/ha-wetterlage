@@ -1,0 +1,134 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Location for Wetterlage",
+        "description": "Choose the location. The integration looks up the nearest DWD forecast station and the official warning area.",
+        "data": {
+          "name": "Name",
+          "ort": "Location"
+        }
+      },
+      "pollen": {
+        "title": "Pollen region",
+        "description": "Found: forecast station {station}, warning area {gemeinde}, district {kreis}. Choose the DWD pollen region; regions of your state are listed first.",
+        "data": {
+          "pollen_region": "Pollen region"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "The DWD service is not reachable right now. Please try again later."
+    },
+    "abort": {
+      "already_configured": "This location is already configured."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Wetterlage",
+        "menu_options": {
+          "station": "Assign weather station",
+          "alle": "All settings (YAML)"
+        }
+      },
+      "station": {
+        "title": "Weather station",
+        "description": "Assign a sensor to each measurement. Leave empty to use the DWD value.",
+        "data": {
+          "vorrang": "What counts for \"now\"?",
+          "temperatur": "Temperature",
+          "feuchte": "Humidity",
+          "wind": "Wind speed",
+          "boeen": "Wind gust",
+          "strahlung": "Solar radiation",
+          "uv": "UV index",
+          "regenrate": "Rain rate",
+          "regen_woche": "Rain this week",
+          "bodentemperatur": "Soil temperature",
+          "luftdruck": "Pressure (absolute)",
+          "gefuehlt_station": "Station apparent temperature"
+        }
+      },
+      "alle": {
+        "title": "All settings",
+        "description": "Every setting can be changed here. Missing values are filled with defaults. A dedicated settings panel will follow.",
+        "data": {
+          "einstellungen": "Settings"
+        }
+      }
+    },
+    "error": {
+      "invalid_settings": "The settings are not a valid object."
+    }
+  },
+  "selector": {
+    "vorrang": {
+      "options": {
+        "station": "Station, DWD as fallback",
+        "dwd": "DWD, station as fallback"
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "gefuehlte_temperatur": {
+        "name": "Apparent temperature"
+      },
+      "regen_naechste_stunde": {
+        "name": "Rain next hour"
+      },
+      "regen_6_stunden": {
+        "name": "Rain next 6 hours"
+      },
+      "regen_24_stunden": {
+        "name": "Rain next 24 hours"
+      },
+      "amtliche_warnung": {
+        "name": "Official warning"
+      },
+      "pollen_hoechste": {
+        "name": "Pollen highest level"
+      },
+      "tiefstwert_nacht": {
+        "name": "Lowest temperature"
+      },
+      "hoechstwert_morgen": {
+        "name": "Highest temperature tomorrow"
+      },
+      "sonnenstunden_morgen": {
+        "name": "Sunshine hours tomorrow"
+      },
+      "regen_7_tage": {
+        "name": "Rain 7 days"
+      },
+      "luftdruck": {
+        "name": "Pressure"
+      },
+      "tagesbericht": {
+        "name": "Daily report"
+      },
+      "pollen_art": {
+        "name": "Pollen {art}"
+      }
+    },
+    "binary_sensor": {
+      "frost": {
+        "name": "Frost"
+      },
+      "gewitter": {
+        "name": "Thunderstorm"
+      },
+      "hitze": {
+        "name": "Heat"
+      },
+      "sturm": {
+        "name": "Storm"
+      },
+      "starkregen": {
+        "name": "Heavy rain"
+      }
+    }
+  }
+}

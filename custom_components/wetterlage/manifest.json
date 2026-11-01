@@ -1,0 +1,13 @@
+{
+  "domain": "wetterlage",
+  "name": "Wetterlage",
+  "codeowners": ["@Vandespawn"],
+  "config_flow": true,
+  "dependencies": [],
+  "documentation": "https://github.com/Vandespawn/ha-wetterlage",
+  "integration_type": "service",
+  "iot_class": "cloud_polling",
+  "issue_tracker": "https://github.com/Vandespawn/ha-wetterlage/issues",
+  "requirements": [],
+  "version": "0.1.0"
+}

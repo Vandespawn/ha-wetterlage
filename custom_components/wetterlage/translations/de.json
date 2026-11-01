@@ -1,0 +1,134 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Ort für Wetterlage",
+        "description": "Wähle den Ort. Die Integration sucht dazu die nächste DWD-Vorhersagestation und das amtliche Warngebiet.",
+        "data": {
+          "name": "Name",
+          "ort": "Ort"
+        }
+      },
+      "pollen": {
+        "title": "Pollenregion",
+        "description": "Gefunden: Vorhersagestation {station}, Warngebiet {gemeinde}, Kreis {kreis}. Wähle die Pollenregion des DWD; die Regionen deines Bundeslands stehen oben.",
+        "data": {
+          "pollen_region": "Pollenregion"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Der DWD ist gerade nicht erreichbar. Bitte später erneut versuchen."
+    },
+    "abort": {
+      "already_configured": "Dieser Ort ist bereits eingerichtet."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Wetterlage",
+        "menu_options": {
+          "station": "Wetterstation zuordnen",
+          "alle": "Alle Einstellungen (YAML)"
+        }
+      },
+      "station": {
+        "title": "Wetterstation",
+        "description": "Ordne jeder Messgröße einen Sensor zu. Leer lassen, um den DWD-Wert zu nutzen.",
+        "data": {
+          "vorrang": "Was zählt für „jetzt“?",
+          "temperatur": "Temperatur",
+          "feuchte": "Luftfeuchte",
+          "wind": "Wind",
+          "boeen": "Böen",
+          "strahlung": "Sonnenstrahlung",
+          "uv": "UV-Index",
+          "regenrate": "Regenrate",
+          "regen_woche": "Regen der Woche",
+          "bodentemperatur": "Bodentemperatur",
+          "luftdruck": "Luftdruck (absolut)",
+          "gefuehlt_station": "Gefühlte Temperatur der Station"
+        }
+      },
+      "alle": {
+        "title": "Alle Einstellungen",
+        "description": "Hier lässt sich jede Einstellung ändern. Fehlende Werte werden mit den Standardwerten ergänzt. Ein eigenes Einstellungsfeld folgt.",
+        "data": {
+          "einstellungen": "Einstellungen"
+        }
+      }
+    },
+    "error": {
+      "invalid_settings": "Die Einstellungen sind kein gültiges Objekt."
+    }
+  },
+  "selector": {
+    "vorrang": {
+      "options": {
+        "station": "Station, DWD nur als Ersatz",
+        "dwd": "DWD, Station nur als Ersatz"
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "gefuehlte_temperatur": {
+        "name": "Gefühlte Temperatur"
+      },
+      "regen_naechste_stunde": {
+        "name": "Regen nächste Stunde"
+      },
+      "regen_6_stunden": {
+        "name": "Regen nächste 6 Stunden"
+      },
+      "regen_24_stunden": {
+        "name": "Regen nächste 24 Stunden"
+      },
+      "amtliche_warnung": {
+        "name": "Amtliche Warnung"
+      },
+      "pollen_hoechste": {
+        "name": "Pollen höchste Belastung"
+      },
+      "tiefstwert_nacht": {
+        "name": "Tiefstwert"
+      },
+      "hoechstwert_morgen": {
+        "name": "Höchstwert morgen"
+      },
+      "sonnenstunden_morgen": {
+        "name": "Sonnenstunden morgen"
+      },
+      "regen_7_tage": {
+        "name": "Regen 7 Tage"
+      },
+      "luftdruck": {
+        "name": "Luftdruck"
+      },
+      "tagesbericht": {
+        "name": "Tagesbericht"
+      },
+      "pollen_art": {
+        "name": "Pollen {art}"
+      }
+    },
+    "binary_sensor": {
+      "frost": {
+        "name": "Frost"
+      },
+      "gewitter": {
+        "name": "Gewitter"
+      },
+      "hitze": {
+        "name": "Hitze"
+      },
+      "sturm": {
+        "name": "Sturm"
+      },
+      "starkregen": {
+        "name": "Starkregen"
+      }
+    }
+  }
+}

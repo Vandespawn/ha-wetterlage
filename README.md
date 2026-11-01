@@ -3,7 +3,9 @@
 [![HACS](https://img.shields.io/badge/HACS-Custom-orange)](https://hacs.xyz)
 [![Lizenz: MIT](https://img.shields.io/badge/Lizenz-MIT-blue)](LICENSE)
 
-> **Status: in Entwicklung.** Die Integration ist noch nicht installierbar. Dieses Repo enthält derzeit das Konzept.
+> **Status: frühe Testversion (0.1.0).** Vorhersage, Warnungen, Pollenflug, Radar, Sensoren und Wetter-Entität
+> sind da. Das Einstellungsfeld in der Seitenleiste und die Dashboard-Karte folgen. Bis dahin lassen sich alle
+> Einstellungen unter **Konfigurieren → Alle Einstellungen** als YAML ändern.
 
 Wetterlage holt Vorhersage, amtliche Warnungen, Pollenflug und Regenradar vom Deutschen Wetterdienst,
 verbindet sie mit deiner eigenen Wetterstation und rechnet aus, was das für dich heißt:
@@ -31,7 +33,7 @@ Jede Entität nennt im Attribut `grund`, warum sie diesen Wert hat, und im Attri
 
 Alle Einstellungen: [docs/einstellungen.md](docs/einstellungen.md)
 
-## Installation (sobald verfügbar)
+## Installation
 
 1. HACS → ⋮ → **Benutzerdefinierte Repositories** → `https://github.com/Vandespawn/ha-wetterlage`, Kategorie **Integration**.
 2. **Wetterlage** installieren und Home Assistant neu starten.
