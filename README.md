@@ -1,5 +1,7 @@
 # Wetterlage für Home Assistant
 
+<img src="docs/images/logo.png" alt="Wetterlage-Logo" width="160" align="right">
+
 [![HACS](https://img.shields.io/badge/HACS-Custom-orange)](https://hacs.xyz)
 [![Lizenz: MIT](https://img.shields.io/badge/Lizenz-MIT-blue)](LICENSE)
 
